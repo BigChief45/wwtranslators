@@ -1,0 +1,43 @@
+<div class="col-md-10 col-md-offset-1">
+   <div class="row">
+      <div class="panel panel-default">
+         <div class="panel-body">
+            
+            <!-- SEARCH JOBS -->
+            <div class="row">
+               <div class="col-md-9 col-md-offset-3">
+                  <h3>Search Jobs</h3>
+                  <%= render 'search_jobs' %>
+               </div>
+            </div>
+            
+            <hr>
+            
+            <!-- CATEGORIES -->
+            <div class="row">
+               <div class="col-md-3">
+                  <h3>Categories</h3>
+                  <%= render 'categories' %>
+               </div>
+               
+               <!-- JOB LISTING -->
+               <div class="col-md-9">
+                  <h3>Browse Jobs</h3>
+                  <% @jobs.each do |job| %>
+                     <%= render 'list_view', :job => job %>
+                     <hr>
+                  <% end %>
+               </div>
+            </div>
+            
+            <!-- PAGINATION -->
+            <div class="row text-center">
+               <%= will_paginate @jobs, renderer: BootstrapPagination::Rails %>
+            </div>
+            
+         </div>
+      </div>
+   </div>
+</div>
+
+

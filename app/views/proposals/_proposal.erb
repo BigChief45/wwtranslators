@@ -1,0 +1,31 @@
+<% if current_user_is_proposal_poster?(proposal) %>
+   <div class="media img-rounded bg-info">
+<% else %>
+   <div class="media">
+<% end %>
+      <div class="media-left">
+         <%= link_to image_tag(proposal.user.avatar.url(:thumbnail), class: 'img-circle'), proposal.user %>
+      </div>
+      <div class="media-body">
+         <h4 class="media-heading"><strong><%= link_to proposal.user.full_name, proposal.user %></strong></h4>
+         
+         <p><%= proposal.content %></p>
+         <% @proposal = proposal %>
+         <% if can_select_proposal? %>
+            <p><%= link_to hire_job_path(proposal), class: 'btn btn-success btn-xs', method: :patch, data: { confirm: 'Are you sure you want to hire this translator? If so, the translator will be notified immediately and your job status will become Unavailable.'} do %><span class="glyphicon glyphicon-ok"></span> Hire This Translator<% end %></p>
+         <% end %>
+         
+         <% if can_edit_proposal?(proposal) %>
+            <p><a><span class="glyphicon glyphicon-pencil"></span> Edit My Proposal</a></p>
+         <% end %>
+         
+         <% if is_selected_proposal?(proposal) %>
+            <p>
+               <span class="label label-success pull-left"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Selected Proposal</span>
+               <% if current_user_is_job_poster? %>
+                  <%= link_to unhire_job_path(proposal), class: 'btn btn-danger btn-xs pull-right', method: :patch, data: { confirm: 'Are you sure you want to unhire this translator? If so, the translator will be notified immediately and your job status will become available again.'} do %><span class="glyphicon glyphicon-ok"></span> Un-hire This Translator<% end %>
+               <% end %>
+            </p>
+         <% end %>
+      </div>
+</div>

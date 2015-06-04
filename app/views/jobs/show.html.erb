@@ -1,0 +1,80 @@
+<div class="col-md-10 col-md-offset-1">
+   <div class="row">
+      <div class="panel panel-default">
+         <div class="panel-body">
+            <div class="page-header">
+               <h3><%= @job.title %></h3>
+               <p><em>Posted by <strong><%= link_to @job.poster.username, @job.poster %></strong> on <%= @job.created_at.to_s.to_time.strftime('%B %e at %l:%M %p') %></em></p>
+            </div>
+             
+            <div class="row">
+               <div class="col-md-6">
+                  <ul class="list-unstyled">
+                     <li><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span><strong> Source Language: </strong><%= @job.source_language %></li>
+                     <li><span class="glyphicon glyphicon-text-color" aria-hidden="true"></span><strong> Target Language: </strong><%= @job.target_language %></li>
+                     <li><span class="glyphicon glyphicon-usd" aria-hidden="true"></span><strong> Price: </strong>$<%= @job.price %></li>
+                  </ul>
+               </div> 
+               
+               <div class="col-md-6">
+                  <ul class="list-unstyled">
+                     <li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><strong> Deadline: </strong><%= @job.deadline %></li>
+                     <li>
+                        <% if @job.available %>
+                           <span class="label label-success">Job is Available</span>
+                        <% else %>
+                           <span class="label label-danger">Job is not Available</span>
+                        <% end %>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            
+            <div class="row">
+               <div class="col-md-12">
+                  <p><%=simple_format h @job.description %></p>
+               </div>
+            </div>
+            
+            <p><span class="glyphicon glyphicon-open" aria-hidden="true"></span><strong> Attachment: </strong> 
+            <% if @job.attachment.exists? %><%= link_to @job.attachment_file_name, @job.attachment.url %><% end %></p>
+            
+            <!-- OPTIONS -->
+            <div class="row text-center">
+               <% if (can? :update, @job) || (current_user == @job.poster) %>
+                  <%= link_to edit_job_path(@job) do %><span class="glyphicon glyphicon-pencil"></span> Edit Job<% end %> 
+               <% end %>
+               <% if (can? :destroy, @job) %>
+                  | <%= link_to job_path(@job), method: :delete, confirm: 'Are you sure?' do %><span class="glyphicon glyphicon-remove"></span> Delete Job<% end %>
+               <% end %>
+               
+               <% if current_user_is_job_translator? %>
+                  <%= link_to root_path, class: 'btn btn-info' do %><span class="glyphicon glyphicon-open-file"></span> Upload My Work<% end %>
+               <% end %>
+            </div>
+            
+            <hr>
+            
+            <h3><%= @job.proposals.count %> Proposals</h3>
+            
+            <!-- ADD PROPOSAL FORM -->
+            <% if can_post_proposal? %>
+               <h4>Post my Proposal</h4>
+               <%= render 'proposals/form' %>
+               <hr>
+            <% end %>
+            
+            <!-- DISPLAY ALL PROPOSALS -->
+            <% @job.proposals.each do |p| %>
+               <%= render 'proposals/proposal', :proposal => p %>
+               <hr>
+            <% end %>
+            
+               
+            <%= link_to jobs_path do %><span class="glyphicon glyphicon-arrow-left"></span> Back<% end %>
+            
+         </div>
+      </div>
+   </div>
+</div>
+

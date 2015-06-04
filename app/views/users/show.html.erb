@@ -1,0 +1,23 @@
+<div class="col-md-10 col-md-offset-1">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12"><h3><%= @user.full_name %>'s Profile</h3></div>
+                </div>
+                        
+                <div class="row">
+                    <div class="col-md-2"><%= image_tag @user.avatar.url(:small), class: 'img-circle' %></div>
+                    <div class="col-md-10">
+                        <ul class="list-unstyled">
+                            <li><strong>Username: </strong><%= @user.username %></li>
+                            <li><strong>Member Since: </strong><%= @user.created_at.to_s.to_time.strftime('%B %e %Y') %></li>
+                            <li><strong>Website: </strong><%= link_to @user.website.to_s, @user.website %></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>            
+        

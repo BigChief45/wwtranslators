@@ -1,0 +1,15 @@
+<div class="col-md-10 col-md-offset-1">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h3><%= @job.title %></h3>
+                </div>
+                
+                <%= render 'form' %>
+                
+                <%= link_to @job do %><span class="glyphicon glyphicon-arrow-left"></span> Cancel<% end %>
+            </div>
+        </div>
+    </div>
+</div>

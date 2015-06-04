@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Worldwide Translators</title>
+  
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
+  <%= csrf_meta_tags %>
+  
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://bootswatch.com/simplex/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+  
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  
+  <%= render 'layouts/header' %>
+  
+  <div class="container">
+    <% flash.each do |name, msg| %>
+      <% if name == "alert" %>
+        <%= content_tag(:div, msg, class: "alert alert-danger") %>
+      <% elsif name == "notice" %>
+        <%= content_tag(:div, msg, class: "alert alert-success") %>
+      <% else %>
+        <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
+      <% end %>
+    <% end %>
+    
+    <%= yield %>
+  </div>
+
+</body>
+</html>

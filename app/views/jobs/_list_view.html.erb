@@ -1,0 +1,39 @@
+<div id="job">
+    <div class="row">
+        <div class="col-md-12">
+            <h4><%= link_to job.title, job %></h4>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="list-unstyled">
+                <li><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span><strong> Source Language: </strong><%= job.source_language %></li>
+                <li><span class="glyphicon glyphicon-text-color" aria-hidden="true"></span> <strong>Target Language: </strong><%= job.target_language %></li>
+                <li><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <strong>Proposals: </strong><%= job.proposals.count %></li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-unstyled">
+                <li><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><strong> Deadline: </strong><%= job.deadline %></li>
+                <li><span class="glyphicon glyphicon-usd" aria-hidden="true"></span><strong> Price: </strong>$<%= job.price %></li>
+                <li>
+                    <% if job.available %>
+                        <span class="label label-success">Job is Available</span>
+                    <% else %>
+                        <span class="label label-danger">Job is not Available</span>
+                    <% end %>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                <%= truncate (job.description), length: 400 %>
+                <%= link_to 'Read more', job %>     
+            </p>
+        </div>
+    </div>
+</div>
