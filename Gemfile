@@ -30,6 +30,8 @@ gem 'will_paginate-bootstrap'
 gem 'ransack'
 gem 'cancancan', '~> 1.10'
 gem 'mailboxer' # Messaging Gem, Tutorial Here: http://www.sitepoint.com/messaging-rails-mailboxer/
+gem 'rails_12factor', group: :production
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
